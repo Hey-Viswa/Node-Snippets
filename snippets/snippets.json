@@ -738,5 +738,14 @@
       "const ${2:val} = myURL.searchParams.get('${3:foo}');"
     ],
     "description": "new URL() parsing"
+  },
+  "New Class Instance": {
+    "prefix": "newinst",
+    "body": [
+      "const ${1:instance} = new ${2:ClassName}({",
+      "\t$3",
+      "});"
+    ],
+    "description": "Instantiate a new class with an options object"
   }
 }
