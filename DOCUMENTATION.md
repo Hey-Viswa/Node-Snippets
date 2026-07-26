@@ -88,3 +88,24 @@ This document explains exactly what each snippet does and the boilerplate code i
 - `cryptohash`: SHA-256 hashing.
 - `utilprom`, `utilinsp`: Promisify callbacks and deep-inspect objects.
 - `urlparse`: Extract search parameters from query strings.
+
+## 📡 External Requests (Axios & Fetch)
+- `axiosg`, `axiosp`: Axios GET and POST requests inside async wrappers.
+- `fetchj`: Native fetch returning parsed JSON data.
+
+## ⚡ Real-Time (Socket.io)
+- `ioinit`: Fast Socket.io server initialization on top of Express.
+- `ioon`: `socket.on()` listener.
+- `ioemit`: `socket.emit()` dispatcher.
+
+## 🔄 Destructuring & JS Utils
+- `reqbody`, `reqparams`, `reqquery`: Instantly extract properties from Express request objects.
+- `des`: Fast object destructuring assignment.
+- `objkeys`, `objvals`, `objent`: Fast `Object` methods.
+- `promall`: `Promise.all()` destructuring block.
+
+## 🗄️ Advanced Mongoose & Express
+- `mtrans`: Mongoose Session and Atomic Transaction block.
+- `mupsert`, `minsert`: Advanced mutating operations (Upsert, InsertMany).
+- `ratelimit`: `express-rate-limit` configuration.
+- `cookieparser`, `multer`: Fast setups for cookies and multipart form uploads.

@@ -747,5 +747,188 @@
       "});"
     ],
     "description": "Instantiate a new class with an options object"
+  },
+  "Express Rate Limiter": {
+    "prefix": "ratelimit",
+    "body": [
+      "const rateLimit = require('express-rate-limit');",
+      "const ${1:apiLimiter} = rateLimit({",
+      "\twindowMs: ${2:15} * 60 * 1000,",
+      "\tmax: ${3:100},",
+      "\tmessage: 'Too many requests from this IP, please try again later.'",
+      "});",
+      "app.use('/${4:api}', ${1:apiLimiter});"
+    ],
+    "description": "Express rate limit middleware"
+  },
+  "Cookie Parser Setup": {
+    "prefix": "cookieparser",
+    "body": [
+      "const cookieParser = require('cookie-parser');",
+      "app.use(cookieParser());"
+    ],
+    "description": "Cookie parser middleware"
+  },
+  "Multer File Upload": {
+    "prefix": "multer",
+    "body": [
+      "const multer = require('multer');",
+      "const upload = multer({ dest: '${1:uploads/}' });",
+      "router.post('/upload', upload.single('${2:file}'), (req, res) => {",
+      "\tres.status(200).json({ success: true, file: req.file });",
+      "});"
+    ],
+    "description": "Multer upload setup"
+  },
+  "Mongoose Transaction": {
+    "prefix": "mtrans",
+    "body": [
+      "const session = await mongoose.startSession();",
+      "session.startTransaction();",
+      "try {",
+      "\t$1",
+      "\tawait session.commitTransaction();",
+      "\tsession.endSession();",
+      "} catch (error) {",
+      "\tawait session.abortTransaction();",
+      "\tsession.endSession();",
+      "\tnext(error);",
+      "}"
+    ],
+    "description": "Mongoose atomic transaction block"
+  },
+  "Mongoose Insert Many": {
+    "prefix": "minsert",
+    "body": [
+      "const ${1:docs} = await ${2:Model}.insertMany(${3:array});"
+    ],
+    "description": "Mongoose insertMany"
+  },
+  "Mongoose Upsert": {
+    "prefix": "mupsert",
+    "body": [
+      "const ${1:doc} = await ${2:Model}.findOneAndUpdate(",
+      "\t{ ${3:filterField}: ${4:filterValue} },",
+      "\t{ \\$set: { ${5:updateField}: ${6:updateValue} } },",
+      "\t{ new: true, upsert: true }",
+      ");"
+    ],
+    "description": "Mongoose upsert"
+  },
+  "Promise All": {
+    "prefix": "promall",
+    "body": [
+      "const [${1:result1}, ${2:result2}] = await Promise.all([",
+      "\t${3:promise1},",
+      "\t${4:promise2}",
+      "]);"
+    ],
+    "description": "Promise.all destructuring"
+  },
+  "Object Keys": {
+    "prefix": "objkeys",
+    "body": [
+      "Object.keys(${1:obj})"
+    ],
+    "description": "Object.keys()"
+  },
+  "Object Values": {
+    "prefix": "objvals",
+    "body": [
+      "Object.values(${1:obj})"
+    ],
+    "description": "Object.values()"
+  },
+  "Object Entries": {
+    "prefix": "objent",
+    "body": [
+      "Object.entries(${1:obj})"
+    ],
+    "description": "Object.entries()"
+  },
+  "Destructure Assignment": {
+    "prefix": "des",
+    "body": [
+      "const { $1 } = ${2:object};"
+    ],
+    "description": "Destructuring assignment"
+  },
+  "Destructure Req Body": {
+    "prefix": "reqbody",
+    "body": [
+      "const { $1 } = req.body;"
+    ],
+    "description": "Extract from req.body"
+  },
+  "Destructure Req Params": {
+    "prefix": "reqparams",
+    "body": [
+      "const { ${1:id} } = req.params;"
+    ],
+    "description": "Extract from req.params"
+  },
+  "Destructure Req Query": {
+    "prefix": "reqquery",
+    "body": [
+      "const { $1 } = req.query;"
+    ],
+    "description": "Extract from req.query"
+  },
+  "Axios GET": {
+    "prefix": "axiosg",
+    "body": [
+      "const { data } = await axios.get('${1:url}');"
+    ],
+    "description": "Axios GET request"
+  },
+  "Axios POST": {
+    "prefix": "axiosp",
+    "body": [
+      "const { data } = await axios.post('${1:url}', ${2:payload});"
+    ],
+    "description": "Axios POST request"
+  },
+  "Fetch JSON": {
+    "prefix": "fetchj",
+    "body": [
+      "const response = await fetch('${1:url}');",
+      "const data = await response.json();"
+    ],
+    "description": "Fetch GET parsed JSON"
+  },
+  "Socket.io Setup": {
+    "prefix": "ioinit",
+    "body": [
+      "const http = require('http');",
+      "const { Server } = require('socket.io');",
+      "const server = http.createServer(app);",
+      "const io = new Server(server, {",
+      "\tcors: { origin: '*' }",
+      "});",
+      "",
+      "io.on('connection', (socket) => {",
+      "\tconsole.log('User connected:', socket.id);",
+      "\tsocket.on('disconnect', () => console.log('User disconnected:', socket.id));",
+      "});",
+      "",
+      "server.listen(process.env.PORT || 5000, () => console.log('Socket.io server running'));"
+    ],
+    "description": "Socket.io boilerplate"
+  },
+  "Socket On": {
+    "prefix": "ioon",
+    "body": [
+      "${1:socket}.on('${2:event}', (${3:data}) => {",
+      "\t$4",
+      "});"
+    ],
+    "description": "Socket listener"
+  },
+  "Socket Emit": {
+    "prefix": "ioemit",
+    "body": [
+      "${1:socket}.emit('${2:event}', ${3:data});"
+    ],
+    "description": "Socket emitter"
   }
 }
