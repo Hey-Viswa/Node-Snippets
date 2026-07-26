@@ -1,0 +1,742 @@
+{
+  "Console Log": {
+    "prefix": "clg",
+    "body": [
+      "console.log($1);"
+    ],
+    "description": "Standard console.log"
+  },
+  "Console Log Variable": {
+    "prefix": "clv",
+    "body": [
+      "console.log('${1:variable}:', ${1:variable});"
+    ],
+    "description": "Log variable"
+  },
+  "Console Error": {
+    "prefix": "cle",
+    "body": [
+      "console.error($1);"
+    ],
+    "description": "Console error"
+  },
+  "Console Warn": {
+    "prefix": "clw",
+    "body": [
+      "console.warn($1);"
+    ],
+    "description": "Console warn"
+  },
+  "Console Table": {
+    "prefix": "clt",
+    "body": [
+      "console.table($1);"
+    ],
+    "description": "Console table"
+  },
+  "Try Catch": {
+    "prefix": "tryc",
+    "body": [
+      "try {",
+      "\t$1",
+      "} catch (error) {",
+      "\tnext(error);",
+      "}"
+    ],
+    "description": "Try Catch block"
+  },
+  "If Else": {
+    "prefix": "ife",
+    "body": [
+      "if (${1:condition}) {",
+      "\t$2",
+      "} else {",
+      "\t$3",
+      "}"
+    ],
+    "description": "If Else block"
+  },
+  "Promise": {
+    "prefix": "prom",
+    "body": [
+      "new Promise((resolve, reject) => {",
+      "\t$1",
+      "});"
+    ],
+    "description": "New Promise"
+  },
+  "IIFE": {
+    "prefix": "iife",
+    "body": [
+      "(async () => {",
+      "\t$1",
+      "})();"
+    ],
+    "description": "Async IIFE"
+  },
+  "Sleep": {
+    "prefix": "sleep",
+    "body": [
+      "const sleep = (ms) => new Promise(r => setTimeout(r, ms));",
+      "await sleep(${1:1000});"
+    ],
+    "description": "Async sleep"
+  },
+  "Require Module": {
+    "prefix": "req",
+    "body": [
+      "const ${1:moduleName} = require('${2:$1}');"
+    ],
+    "description": "Require module"
+  },
+  "Module Exports": {
+    "prefix": "mexp",
+    "body": [
+      "module.exports = {",
+      "\t$1",
+      "};"
+    ],
+    "description": "Export module"
+  },
+  "Import Module": {
+    "prefix": "imp",
+    "body": [
+      "import ${1:moduleName} from '${2:module}';"
+    ],
+    "description": "ES6 Import"
+  },
+  "Export Default": {
+    "prefix": "expd",
+    "body": [
+      "export default ${1:module};"
+    ],
+    "description": "ES6 Export Default"
+  },
+  "Export Named": {
+    "prefix": "exp",
+    "body": [
+      "export const ${1:name} = ${2:value};"
+    ],
+    "description": "ES6 Export Named"
+  },
+  "Express App Entry": {
+    "prefix": "expressapp",
+    "body": [
+      "const express = require('express');",
+      "const cors = require('cors');",
+      "require('dotenv').config();",
+      "",
+      "const app = express();",
+      "",
+      "app.use(cors());",
+      "app.use(express.json());",
+      "app.use(express.urlencoded({ extended: true }));",
+      "",
+      "app.get('/', (req, res) => res.send('API is running...'));",
+      "",
+      "const PORT = process.env.PORT || 5000;",
+      "app.listen(PORT, () => console.log(`Server running on port \\${PORT}`));"
+    ],
+    "description": "Express app entry"
+  },
+  "Express Router File Setup": {
+    "prefix": [
+      "erouter",
+      "router"
+    ],
+    "body": [
+      "const express = require('express');",
+      "const router = express.Router();",
+      "",
+      "router.${1|get,post,put,delete|}('/', async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$2",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "});",
+      "",
+      "module.exports = router;"
+    ],
+    "description": "Express Router setup"
+  },
+  "Express Async Controller": {
+    "prefix": [
+      "ec",
+      "controller"
+    ],
+    "body": [
+      "const ${1:controllerName} = async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$2",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "};",
+      "",
+      "module.exports = { $1 };"
+    ],
+    "description": "Express controller"
+  },
+  "Express Middleware": {
+    "prefix": [
+      "mw",
+      "middleware"
+    ],
+    "body": [
+      "const ${1:middlewareName} = async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$2",
+      "\t\tnext();",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "};",
+      "",
+      "module.exports = { $1 };"
+    ],
+    "description": "Express middleware"
+  },
+  "Express Global Error Handler": {
+    "prefix": "errhandler",
+    "body": [
+      "app.use((err, req, res, next) => {",
+      "\tconsole.error(err.stack);",
+      "\tconst statusCode = err.statusCode || 500;",
+      "\tres.status(statusCode).json({",
+      "\t\tsuccess: false,",
+      "\t\tmessage: err.message || 'Internal Server Error'",
+      "\t});",
+      "});"
+    ],
+    "description": "Global error handler"
+  },
+  "Express Route": {
+    "prefix": "route",
+    "body": [
+      "router.${1|get,post,put,delete|}('/${2:path}', async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$3",
+      "\t\tres.status(200).json({ success: true, data: {} });",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "});"
+    ],
+    "description": "Express Route"
+  },
+  "Express Route GET": {
+    "prefix": "rget",
+    "body": [
+      "router.get('/${1:path}', async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$2",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "});"
+    ],
+    "description": "Router GET"
+  },
+  "Express Route POST": {
+    "prefix": "rpost",
+    "body": [
+      "router.post('/${1:path}', async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$2",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "});"
+    ],
+    "description": "Router POST"
+  },
+  "Express Route PUT": {
+    "prefix": "rput",
+    "body": [
+      "router.put('/${1:path}', async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$2",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "});"
+    ],
+    "description": "Router PUT"
+  },
+  "Express Route DELETE": {
+    "prefix": "rdel",
+    "body": [
+      "router.delete('/${1:path}', async (req, res, next) => {",
+      "\ttry {",
+      "\t\t$2",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "});"
+    ],
+    "description": "Router DELETE"
+  },
+  "Express Route with ID": {
+    "prefix": "rid",
+    "body": [
+      "router.${1|get,put,delete|}('/:id', async (req, res, next) => {",
+      "\ttry {",
+      "\t\tconst ${2:doc} = await ${3:Model}.findById(req.params.id);",
+      "\t\tif (!${2:doc}) return res.status(404).json({ message: '${3:Model} not found' });",
+      "\t\t$4",
+      "\t\tres.status(200).json({ success: true, data: ${2:doc} });",
+      "\t} catch (error) {",
+      "\t\tnext(error);",
+      "\t}",
+      "});"
+    ],
+    "description": "Route with ID"
+  },
+  "Success 200 Return": {
+    "prefix": "s200",
+    "body": [
+      "return res.status(200).json({ success: true, data: ${1:data} });"
+    ],
+    "description": "Return 200 JSON"
+  },
+  "Success 201 Created": {
+    "prefix": "s201",
+    "body": [
+      "return res.status(201).json({ success: true, data: ${1:data} });"
+    ],
+    "description": "Return 201 JSON"
+  },
+  "Error 400 Bad Request": {
+    "prefix": "e400",
+    "body": [
+      "return res.status(400).json({ success: false, message: '${1:Bad Request}' });"
+    ],
+    "description": "Return 400"
+  },
+  "Error 401 Unauthorized": {
+    "prefix": "e401",
+    "body": [
+      "return res.status(401).json({ success: false, message: '${1:Not Authorized}' });"
+    ],
+    "description": "Return 401"
+  },
+  "Error 403 Forbidden": {
+    "prefix": "e403",
+    "body": [
+      "return res.status(403).json({ success: false, message: '${1:Forbidden}' });"
+    ],
+    "description": "Return 403"
+  },
+  "Error 404 Not Found": {
+    "prefix": "e404",
+    "body": [
+      "return res.status(404).json({ success: false, message: '${1:Not Found}' });"
+    ],
+    "description": "Return 404"
+  },
+  "Error 500 Server Error": {
+    "prefix": "e500",
+    "body": [
+      "return res.status(500).json({ success: false, message: '${1:Server Error}' });"
+    ],
+    "description": "Return 500"
+  },
+  "Mongoose Connect": {
+    "prefix": "mconn",
+    "body": [
+      "const mongoose = require('mongoose');",
+      "",
+      "const connectDB = async () => {",
+      "\ttry {",
+      "\t\tawait mongoose.connect(process.env.${1:MONGO_URI});",
+      "\t\tconsole.log('MongoDB Connected...');",
+      "\t} catch (error) {",
+      "\t\tconsole.error('MongoDB error:', error.message);",
+      "\t\tprocess.exit(1);",
+      "\t}",
+      "};",
+      "",
+      "module.exports = connectDB;"
+    ],
+    "description": "Mongoose connect"
+  },
+  "Mongoose Schema": {
+    "prefix": "mschema",
+    "body": [
+      "const mongoose = require('mongoose');",
+      "",
+      "const ${1:Model}Schema = new mongoose.Schema({",
+      "\t${2:field}: {",
+      "\t\ttype: ${3|String,Number,Boolean,Date,mongoose.Schema.Types.ObjectId|},",
+      "\t\trequired: true",
+      "\t}",
+      "}, { timestamps: true });",
+      "",
+      "module.exports = mongoose.model('${1:Model}', ${1:Model}Schema);"
+    ],
+    "description": "Mongoose schema"
+  },
+  "Mongoose Find All": {
+    "prefix": "mfind",
+    "body": [
+      "const ${1:docs} = await ${2:Model}.find(${3:{}});"
+    ],
+    "description": "Mongoose find"
+  },
+  "Mongoose Find One": {
+    "prefix": "mfindone",
+    "body": [
+      "const ${1:doc} = await ${2:Model}.findOne({ ${3:field}: ${4:value} });"
+    ],
+    "description": "Mongoose findOne"
+  },
+  "Mongoose Find By ID": {
+    "prefix": "mfid",
+    "body": [
+      "const ${1:doc} = await ${2:Model}.findById(${3:req.params.id});"
+    ],
+    "description": "Mongoose findById"
+  },
+  "Mongoose Create": {
+    "prefix": "mcreate",
+    "body": [
+      "const ${1:doc} = await ${2:Model}.create(req.body);"
+    ],
+    "description": "Mongoose create"
+  },
+  "Mongoose Save": {
+    "prefix": "msave",
+    "body": [
+      "await ${1:doc}.save();"
+    ],
+    "description": "Mongoose save"
+  },
+  "Mongoose Update By ID": {
+    "prefix": "mupd",
+    "body": [
+      "const ${1:doc} = await ${2:Model}.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });"
+    ],
+    "description": "Mongoose findByIdAndUpdate"
+  },
+  "Mongoose Delete By ID": {
+    "prefix": "mdel",
+    "body": [
+      "await ${2:Model}.findByIdAndDelete(req.params.id);"
+    ],
+    "description": "Mongoose findByIdAndDelete"
+  },
+  "Mongoose 404 Return": {
+    "prefix": "m404",
+    "body": [
+      "if (!${1:doc}) {",
+      "\treturn res.status(404).json({ success: false, message: '${2:Resource} not found' });",
+      "}"
+    ],
+    "description": "Mongoose 404 guard"
+  },
+  "Bcrypt Hash": {
+    "prefix": "bhash",
+    "body": [
+      "const salt = await bcrypt.genSalt(10);",
+      "const ${1:hashedPassword} = await bcrypt.hash(${2:password}, salt);"
+    ],
+    "description": "Bcrypt hash"
+  },
+  "Bcrypt Compare": {
+    "prefix": "bcomp",
+    "body": [
+      "const ${1:isMatch} = await bcrypt.compare(${2:password}, ${3:hashedPassword});",
+      "if (!${1:isMatch}) {",
+      "\treturn res.status(401).json({ success: false, message: 'Invalid credentials' });",
+      "}"
+    ],
+    "description": "Bcrypt compare"
+  },
+  "JWT Sign": {
+    "prefix": "jwtsign",
+    "body": [
+      "const ${1:token} = jwt.sign(",
+      "\t{ ${2:id}: ${3:user._id} },",
+      "\tprocess.env.${4:JWT_SECRET},",
+      "\t{ expiresIn: '${5:1d}' }",
+      ");"
+    ],
+    "description": "JWT sign"
+  },
+  "JWT Verify Middleware": {
+    "prefix": "jwtverify",
+    "body": [
+      "const jwt = require('jsonwebtoken');",
+      "const ${1:User} = require('../models/${1:User}');",
+      "",
+      "const protect = async (req, res, next) => {",
+      "\tlet token;",
+      "\tif (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {",
+      "\t\ttry {",
+      "\t\t\ttoken = req.headers.authorization.split(' ')[1];",
+      "\t\t\tconst decoded = jwt.verify(token, process.env.JWT_SECRET);",
+      "\t\t\treq.user = await ${1:User}.findById(decoded.id).select('-password');",
+      "\t\t\tnext();",
+      "\t\t} catch (error) {",
+      "\t\t\treturn res.status(401).json({ success: false, message: 'Not authorized, token failed' });",
+      "\t\t}",
+      "\t}",
+      "\tif (!token) {",
+      "\t\treturn res.status(401).json({ success: false, message: 'Not authorized, no token' });",
+      "\t}",
+      "};",
+      "",
+      "module.exports = { protect };"
+    ],
+    "description": "Complete JWT middleware"
+  },
+  "UUID v4": {
+    "prefix": "uuidv4",
+    "body": [
+      "const { v4: uuidv4 } = require('uuid');",
+      "const id = uuidv4();"
+    ],
+    "description": "Generate UUID"
+  },
+  "Path Join": {
+    "prefix": "pathjoin",
+    "body": [
+      "const ${1:fullPath} = path.join(__dirname, '${2:folder}', '${3:file}');"
+    ],
+    "description": "path.join"
+  },
+  "Path Resolve": {
+    "prefix": "pathres",
+    "body": [
+      "const ${1:absPath} = path.resolve(__dirname, '${2:folder}');"
+    ],
+    "description": "path.resolve"
+  },
+  "Path Basename": {
+    "prefix": "pathbase",
+    "body": [
+      "const ${1:name} = path.basename(${2:filePath});"
+    ],
+    "description": "path.basename"
+  },
+  "Path Extname": {
+    "prefix": "pathext",
+    "body": [
+      "const ${1:ext} = path.extname(${2:filePath});"
+    ],
+    "description": "path.extname"
+  },
+  "FS Read File": {
+    "prefix": "fsread",
+    "body": [
+      "const fs = require('fs/promises');",
+      "const ${1:data} = await fs.readFile(${2:path}, 'utf8');"
+    ],
+    "description": "FS read file"
+  },
+  "FS Write File": {
+    "prefix": "fswrite",
+    "body": [
+      "const fs = require('fs/promises');",
+      "await fs.writeFile(${1:path}, ${2:data}, 'utf8');"
+    ],
+    "description": "FS write file"
+  },
+  "FS Append File": {
+    "prefix": "fsapp",
+    "body": [
+      "const fs = require('fs/promises');",
+      "await fs.appendFile(${1:path}, ${2:data}, 'utf8');"
+    ],
+    "description": "FS append file"
+  },
+  "FS Unlink": {
+    "prefix": "fsunlink",
+    "body": [
+      "const fs = require('fs/promises');",
+      "await fs.unlink(${1:path});"
+    ],
+    "description": "FS delete file"
+  },
+  "FS Make Dir": {
+    "prefix": "fsmkdir",
+    "body": [
+      "const fs = require('fs/promises');",
+      "await fs.mkdir(${1:path}, { recursive: true });"
+    ],
+    "description": "FS create directory"
+  },
+  "FS Read Dir": {
+    "prefix": "fsdir",
+    "body": [
+      "const fs = require('fs/promises');",
+      "const files = await fs.readdir(${1:path});"
+    ],
+    "description": "FS read directory"
+  },
+  "Event Emitter Setup": {
+    "prefix": "eventset",
+    "body": [
+      "const EventEmitter = require('events');",
+      "class ${1:MyEmitter} extends EventEmitter {}",
+      "const ${2:emitter} = new ${1:MyEmitter}();"
+    ],
+    "description": "EventEmitter setup"
+  },
+  "Event On": {
+    "prefix": "eventon",
+    "body": [
+      "${1:emitter}.on('${2:eventName}', (${3:data}) => {",
+      "\t$4",
+      "});"
+    ],
+    "description": "EventEmitter.on"
+  },
+  "Event Emit": {
+    "prefix": "eventemit",
+    "body": [
+      "${1:emitter}.emit('${2:eventName}', ${3:payload});"
+    ],
+    "description": "EventEmitter.emit"
+  },
+  "OS Info": {
+    "prefix": "osinfo",
+    "body": [
+      "const os = require('os');",
+      "const cpus = os.cpus();",
+      "const totalMem = os.totalmem();",
+      "const freeMem = os.freemem();"
+    ],
+    "description": "OS properties"
+  },
+  "OS Platform": {
+    "prefix": "osplat",
+    "body": [
+      "const platform = os.platform(); // 'darwin', 'win32', 'linux'"
+    ],
+    "description": "OS platform"
+  },
+  "Child Process Exec": {
+    "prefix": "cpexec",
+    "body": [
+      "const { exec } = require('child_process');",
+      "exec('${1:command}', (error, stdout, stderr) => {",
+      "\tif (error) {",
+      "\t\tconsole.error(`exec error: \\${error}`);",
+      "\t\treturn;",
+      "\t}",
+      "\tconsole.log(`stdout: \\${stdout}`);",
+      "\tconsole.error(`stderr: \\${stderr}`);",
+      "});"
+    ],
+    "description": "child_process.exec"
+  },
+  "Child Process Spawn": {
+    "prefix": "cpspawn",
+    "body": [
+      "const { spawn } = require('child_process');",
+      "const ${1:child} = spawn('${2:command}', ['${3:arg1}']);",
+      "${1:child}.stdout.on('data', (data) => console.log(`stdout: \\${data}`));",
+      "${1:child}.stderr.on('data', (data) => console.error(`stderr: \\${data}`));",
+      "${1:child}.on('close', (code) => console.log(`child process exited with code \\${code}`));"
+    ],
+    "description": "child_process.spawn"
+  },
+  "Cluster Setup": {
+    "prefix": "cluster",
+    "body": [
+      "const cluster = require('cluster');",
+      "const os = require('os');",
+      "",
+      "if (cluster.isPrimary) {",
+      "\tconst numCPUs = os.cpus().length;",
+      "\tfor (let i = 0; i < numCPUs; i++) cluster.fork();",
+      "\tcluster.on('exit', (worker, code, signal) => {",
+      "\t\tconsole.log(`worker \\${worker.process.pid} died`);",
+      "\t\tcluster.fork();",
+      "\t});",
+      "} else {",
+      "\t${1:// worker code e.g. app.listen()}",
+      "\tconsole.log(`Worker \\${process.pid} started`);",
+      "}"
+    ],
+    "description": "Cluster setup boilerplate"
+  },
+  "Read Stream": {
+    "prefix": "streamread",
+    "body": [
+      "const fs = require('fs');",
+      "const readStream = fs.createReadStream('${1:filePath}', { encoding: 'utf8' });",
+      "readStream.on('data', (chunk) => {",
+      "\t$2",
+      "});",
+      "readStream.on('end', () => console.log('Read finished.'));"
+    ],
+    "description": "fs.createReadStream"
+  },
+  "Write Stream": {
+    "prefix": "streamwrite",
+    "body": [
+      "const fs = require('fs');",
+      "const writeStream = fs.createWriteStream('${1:filePath}');",
+      "writeStream.write('${2:data}\\n');",
+      "writeStream.end();"
+    ],
+    "description": "fs.createWriteStream"
+  },
+  "Stream Pipeline": {
+    "prefix": "streampipe",
+    "body": [
+      "const { pipeline } = require('stream/promises');",
+      "const fs = require('fs');",
+      "const zlib = require('zlib');",
+      "await pipeline(",
+      "\tfs.createReadStream('${1:source}'),",
+      "\tzlib.createGzip(),",
+      "\tfs.createWriteStream('${2:destination.gz}')",
+      ");"
+    ],
+    "description": "stream.pipeline"
+  },
+  "Crypto Hash": {
+    "prefix": "cryptohash",
+    "body": [
+      "const crypto = require('crypto');",
+      "const ${1:hash} = crypto.createHash('${2:sha256}').update(${3:data}).digest('hex');"
+    ],
+    "description": "crypto.createHash"
+  },
+  "Crypto Random Bytes": {
+    "prefix": "cryptorand",
+    "body": [
+      "const crypto = require('crypto');",
+      "const ${1:token} = crypto.randomBytes(${2:32}).toString('hex');"
+    ],
+    "description": "crypto.randomBytes"
+  },
+  "Util Promisify": {
+    "prefix": "utilprom",
+    "body": [
+      "const util = require('util');",
+      "const ${1:promisifiedFunc} = util.promisify(${2:func});"
+    ],
+    "description": "util.promisify"
+  },
+  "Util Inspect": {
+    "prefix": "utilinsp",
+    "body": [
+      "const util = require('util');",
+      "console.log(util.inspect(${1:obj}, { showHidden: false, depth: null, colors: true }));"
+    ],
+    "description": "util.inspect"
+  },
+  "URL Parse": {
+    "prefix": "urlparse",
+    "body": [
+      "const myURL = new URL('${1:https://example.org/api?foo=bar}');",
+      "const ${2:val} = myURL.searchParams.get('${3:foo}');"
+    ],
+    "description": "new URL() parsing"
+  }
+}
