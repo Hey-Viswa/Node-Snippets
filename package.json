@@ -2,7 +2,7 @@
   "name": "node-backend-arsenal",
   "displayName": "Node.js Backend Arsenal (Express, Mongoose, Built-ins)",
   "description": "The ultimate high-velocity snippet collection for Node.js backend development. Over 150+ snippets covering Express, Mongoose, JWT, Redis, AWS, and native Node modules.",
-  "version": "1.0.3",
+  "version": "1.0.2",
   "publisher": "viswaranjan",
   "icon": "icon.jpg",
   "engines": {
