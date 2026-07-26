@@ -18,6 +18,10 @@
     "javascript",
     "snippets"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hey-Viswa/Node-Snippets.git"
+  },
   "author": "Viswaranjan",
   "license": "MIT",
   "contributes": {
